@@ -8,6 +8,7 @@ using ShopTARge23.Core.Dto;
 
 
 
+
 namespace ShopTARge23.Controllers
 {
     public class KindergartenController : Controller
@@ -101,7 +102,60 @@ namespace ShopTARge23.Controllers
 
             return RedirectToAction(nameof(Index), vm);
         }
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var kindergarten = await _kindergartenServices.GetAsync(id);
 
+            if (kindergarten == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new KindergartenDeleteViewModel();
+
+            vm.Id = kindergarten.Id;
+            vm.KindergartenName = kindergarten.KindergartenName;
+            vm.CreatedAt = kindergarten.CreatedAt;
+            vm.ModifiedAt = kindergarten.ModifiedAt;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var kindergarten = await _kindergartenServices.Delete(id);
+
+            if (kindergarten == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            //tuua siia piltide  vaatamise funktsionaalsus
+
+            var kindergarten = await _kindergartenServices.GetAsync(id);
+
+            if (kindergarten == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new KindergartenDetailsViewModel();
+
+            vm.Id = kindergarten.Id;
+            vm.KindergartenName = kindergarten.KindergartenName;
+            vm.CreatedAt = kindergarten.CreatedAt;
+            vm.ModifiedAt = kindergarten.ModifiedAt;
+
+            return View(vm);
+        }
     }
 
 }

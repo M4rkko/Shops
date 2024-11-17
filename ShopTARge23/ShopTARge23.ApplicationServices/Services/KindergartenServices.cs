@@ -55,5 +55,15 @@ namespace ShopTARge23.ApplicationServices.Services
 
             return domain;
         }
+        public async Task<Kindergarten> Delete(Guid id)
+        {
+            var result = await _context.Kindergarten
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.Kindergarten.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
+        }
     }
 }
