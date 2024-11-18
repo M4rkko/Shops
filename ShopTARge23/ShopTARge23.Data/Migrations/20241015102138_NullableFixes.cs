@@ -76,16 +76,16 @@ namespace ShopTARge23.Data.Migrations
                 oldType: "datetime2");
 
             migrationBuilder.AlterColumn<double>(
-                name: "Size",
-                table: "RealEstates",
-                type: "float",
+                name: "KindergartenName",
+                table: "Kindergartens",
+                type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(double),
-                oldType: "float");
+                oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<int>(
-                name: "RoomNumber",
-                table: "RealEstates",
+                name: "ChildrenCount",
+                table: "Kindergartens",
                 type: "int",
                 nullable: true,
                 oldClrType: typeof(int),
@@ -93,15 +93,15 @@ namespace ShopTARge23.Data.Migrations
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
-                table: "RealEstates",
+                table: "Kindergartens",
                 type: "datetime2",
                 nullable: true,
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Location",
-                table: "RealEstates",
+                name: "GroupName",
+                table: "Kindergartens",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -109,15 +109,15 @@ namespace ShopTARge23.Data.Migrations
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
-                table: "RealEstates",
+                table: "Kindergartens",
                 type: "datetime2",
                 nullable: true,
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2");
 
             migrationBuilder.AlterColumn<string>(
-                name: "BuildingType",
-                table: "RealEstates",
+                name: "Teacher",
+                table: "Kindergartens",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -232,18 +232,18 @@ namespace ShopTARge23.Data.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<double>(
-                name: "Size",
-                table: "RealEstates",
-                type: "float",
+                name: "KindergartenName",
+                table: "Kindergartens",
+                type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: 0.0,
                 oldClrType: typeof(double),
-                oldType: "float",
+                oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<int>(
-                name: "RoomNumber",
-                table: "RealEstates",
+                name: "ChildrenCount",
+                table: "Kindergartens",
                 type: "int",
                 nullable: false,
                 defaultValue: 0,
@@ -253,7 +253,7 @@ namespace ShopTARge23.Data.Migrations
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
-                table: "RealEstates",
+                table: "Kindergartens",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -262,8 +262,8 @@ namespace ShopTARge23.Data.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Location",
-                table: "RealEstates",
+                name: "GroupName",
+                table: "Kindergartens",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "",
@@ -273,7 +273,7 @@ namespace ShopTARge23.Data.Migrations
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
-                table: "RealEstates",
+                table: "Kindergartens",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -282,8 +282,8 @@ namespace ShopTARge23.Data.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "BuildingType",
-                table: "RealEstates",
+                name: "Teacher",
+                table: "Kindergartens",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "",

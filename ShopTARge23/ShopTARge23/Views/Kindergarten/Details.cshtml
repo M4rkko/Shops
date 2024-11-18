@@ -17,6 +17,20 @@
             @Html.DisplayFor(model => model.KindergartenName)
         </div>
 
+        <div class="form-group row">
+            <label asp-for="GroupName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.GroupName)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="ChildrenCount" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.ChildrenCount)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Teacher" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Teacher)
+        </div>
  
 
         <div class="form-group row">
@@ -28,6 +42,13 @@
             <label asp-for="ModifiedAt" class="col-sm-2 col-form-label"></label>
             @Html.DisplayFor(model => model.ModifiedAt)
         </div>
+
+
+        @foreach (var images in Model.Image)
+        {
+            <partial name="_Images" model="images" />
+        }
+
 
     </dl>
 

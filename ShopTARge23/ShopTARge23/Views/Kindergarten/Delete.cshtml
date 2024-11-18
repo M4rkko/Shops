@@ -17,6 +17,25 @@
             <label asp-for="KindergartenName" class="col-sm-2 col-form-label"></label>
             @Html.DisplayFor(model => model.KindergartenName)
         </div>
+
+    </dl
+        <dl class="row">
+        <div class="form-group row">
+            <label asp-for="GroupName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.GroupName)
+        </div>
+    </dl>
+        <dl class="row">
+        <div class="form-group row">
+            <label asp-for="ChildrenCount" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.ChildrenCount)
+        </div>
+    </dl>
+        <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Teacher" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Teacher)
+        </div>
     </dl>
 
     <dl class="row">
@@ -32,6 +51,11 @@
             @Html.DisplayFor(model => model.ModifiedAt)
         </div>
     </dl>
+
+    @foreach (var images in Model.Image)
+    {
+        <partial name="_Images" model="images" />
+    }
 
     <hr />
     <form asp-action="DeleteConfirmation">

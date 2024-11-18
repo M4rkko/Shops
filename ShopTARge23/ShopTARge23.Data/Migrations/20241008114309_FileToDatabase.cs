@@ -18,7 +18,7 @@ namespace ShopTARge23.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    RealEstateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    KindergartenId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -19,6 +19,9 @@
             <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Kindergarten Name</th>
+                <th scope="col">Group Name</th>
+                <th scope="col">Children Count</th>
+                <th scope="col">Teacher</th>
                 <th></th>
             </tr>
         </thead>
@@ -28,6 +31,9 @@
                 <tr>
                     <td>@rowNumber</td>
                     <td>@kindergarten.KindergartenName</td>
+                    <td>@kindergarten.GroupName</td>
+                    <td>@kindergarten.ChildrenCount</td>
+                    <td>@kindergarten.Teacher</td>
                     <td>
                         <a asp-action="details" asp-controller="kindergarten" asp-route-id="@kindergarten.Id" class="btn btn-info">Details</a>
                         <a asp-action="update" asp-controller="kindergarten" asp-route-id="@kindergarten.Id" class="btn btn-outline-primary">Update</a>
