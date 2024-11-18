@@ -1,4 +1,7 @@
-﻿namespace ShopTARge23.Models.Kindergarten
+﻿using ShopTARge23.Core.Dto;
+using ShopTARge23.Models.Kindergarten;
+
+namespace ShopTARge23.Models.Kindergarten
 {
     public class KindergartenDeleteViewModel
     {
@@ -10,7 +13,8 @@
         public List<KindergartenImageViewModel> Image { get; set; }
             = new List<KindergartenImageViewModel>();
 
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? ModifiedAt { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

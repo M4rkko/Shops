@@ -8,7 +8,6 @@ namespace ShopTARge23.Data.Migrations
     /// <inheritdoc />
     public partial class Kindergarten : Migration
     {
-
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,27 +18,27 @@ namespace ShopTARge23.Data.Migrations
                 nullable: true);
 
             migrationBuilder.CreateTable(
-                name: "Kindergarten",
+                name: "Kindergartens",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    KindergartenName = table.Column<string>(type: "nvarchar(36)", nullable: false),
-                    GroupName = table.Column<string>(type: "nvarchar(64)", nullable: false),
+                    GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChildrenCount = table.Column<int>(type: "int", nullable: false),
-                    Teacher = table.Column<string>(type: "nvarchar(64)", nullable: false),
+                    KindergartenName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Teacher = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kindergarten", x => x.Id);
+                    table.PrimaryKey("PK_Kindergartens", x => x.Id);
                 });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-                  migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "Kindergartens");
 
             migrationBuilder.DropColumn(

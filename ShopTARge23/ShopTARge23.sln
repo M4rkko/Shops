@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge23.Core", "ShopTAR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge23.Data", "ShopTARge23.Data\ShopTARge23.Data.csproj", "{3B7FAC9B-522B-4B74-BF67-0A666216366E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge23.RealEstateTest", "ShopTARge23.RealEstateTest\ShopTARge23.RealEstateTest.csproj", "{C859A08D-B7CF-45A5-9105-C41250725BEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3B7FAC9B-522B-4B74-BF67-0A666216366E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B7FAC9B-522B-4B74-BF67-0A666216366E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B7FAC9B-522B-4B74-BF67-0A666216366E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C859A08D-B7CF-45A5-9105-C41250725BEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C859A08D-B7CF-45A5-9105-C41250725BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C859A08D-B7CF-45A5-9105-C41250725BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C859A08D-B7CF-45A5-9105-C41250725BEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

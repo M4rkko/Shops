@@ -1,4 +1,6 @@
-﻿namespace ShopTARge23.Models.Kindergarten
+﻿using ShopTARge23.Core.Dto;
+
+namespace ShopTARge23.Models.Kindergarten
 {
     public class KindergartenIndexViewModel
     {
@@ -7,8 +9,5 @@
         public string? GroupName { get; set; }
         public int? ChildrenCount { get; set; }
         public string? Teacher { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? ModifiedAt { get; set; }
     }
 }
