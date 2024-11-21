@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge23.Data", "ShopTAR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARge23.RealEstateTest", "ShopTARge23.RealEstateTest\ShopTARge23.RealEstateTest.csproj", "{C859A08D-B7CF-45A5-9105-C41250725BEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTARge23.xUnitKindergartenTest", "ShopTARge23.xUnitKindergartenTest\ShopTARge23.xUnitKindergartenTest.csproj", "{FA0D25D0-23BF-43D4-9087-EE2FA4EE8BAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C859A08D-B7CF-45A5-9105-C41250725BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C859A08D-B7CF-45A5-9105-C41250725BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C859A08D-B7CF-45A5-9105-C41250725BEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA0D25D0-23BF-43D4-9087-EE2FA4EE8BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA0D25D0-23BF-43D4-9087-EE2FA4EE8BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA0D25D0-23BF-43D4-9087-EE2FA4EE8BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA0D25D0-23BF-43D4-9087-EE2FA4EE8BAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
