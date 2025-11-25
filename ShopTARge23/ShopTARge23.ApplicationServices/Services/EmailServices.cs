@@ -1,72 +1,83 @@
-﻿using MimeKit;
+﻿using Microsoft.Extensions.Configuration;
+using MimeKit;
 using ShopTARge23.Core.Dto;
 using ShopTARge23.Core.ServiceInterface;
 using MailKit.Net.Smtp;
-using Microsoft.Extensions.Configuration;
 
 
 namespace ShopTARge23.ApplicationServices.Services
 {
     public class EmailServices : IEmailServices
     {
-
         private readonly IConfiguration _config;
-        public EmailServices ( IConfiguration config )
+
+        public EmailServices
+            (
+                IConfiguration config
+            )
         {
             _config = config;
         }
-        
 
         public void SendEmail(EmailDto dto)
         {
-            var bodyBuilder = new BodyBuilder
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
+            email.To.Add(MailboxAddress.Parse(dto.To));
+            email.Subject = dto.Subject;
+            //email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            //{
+            //    Text = dto.Body
+            //};
+            var builder = new BodyBuilder
             {
-                TextBody = dto.Body,
+                HtmlBody = dto.Body
             };
-                var email = new MimeMessage();
-                email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
-                email.To.Add(MailboxAddress.Parse(dto.To));
-                email.Subject = dto.Subject;
 
-            email.Body = bodyBuilder.ToMessageBody();
-
-            if (dto.Attachments != null)
+            foreach (var file in dto.Attachment)
             {
-                foreach (var file in dto.Attachments)
+                if (file.Length > 0)
                 {
-                    using (var memoryStream = new MemoryStream())
+                    using (var stream = new MemoryStream())
                     {
-                        file.CopyTo(memoryStream);
-                        bodyBuilder.Attachments.Add(file.FileName, memoryStream.ToArray());
+                        file.CopyTo(stream);
+                        stream.Position = 0;
+                        builder.Attachments.Add(file.FileName, stream.ToArray());
                     }
                 }
             }
-            email.Body = bodyBuilder.ToMessageBody();
-            //  email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
-               // {
-                //    Text = dto.Body
-               // };
-                // mailkit.net.smtp
+            email.Body = builder.ToMessageBody();
 
 
-
-                using var smtpClient = new SmtpClient();
-            // tuleb valida õige port ja kasutada sourceresocketoptionit
-            //autentita
-            //saada email
-            //vabastada resurss
-
-
+            //kindlasti kasutada mailkit.net.smtp
             using var smtp = new SmtpClient();
-            { 
+
             smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
-            smtp.Authenticate(_config.GetSection("EmailUserName").Value, _config.GetSection("EmailPassword").Value);
+            smtp.Authenticate(_config.GetSection("EmailUsername").Value, _config.GetSection("EmailPassword").Value);
             smtp.Send(email);
             smtp.Disconnect(true);
-
         }
+        public void SendConfirmation(string to, string subject, string confirmationLink)
+        {
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
+            email.To.Add(MailboxAddress.Parse(to));
+            email.Subject = subject;
 
+            var body = $"Please confirm your account by clicking <a href='{confirmationLink}'>here</a>.";
 
+            var builder = new BodyBuilder
+            {
+                HtmlBody = body
+            };
+
+            email.Body = builder.ToMessageBody();
+
+            using var smtp = new SmtpClient();
+            smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
+            smtp.Authenticate(_config.GetSection("EmailUsername").Value, _config.GetSection("EmailPassword").Value);
+            smtp.Send(email);
+            smtp.Disconnect(true);
         }
     }
 }
