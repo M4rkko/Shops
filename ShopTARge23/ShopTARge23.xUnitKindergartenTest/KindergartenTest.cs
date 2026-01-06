@@ -68,6 +68,91 @@ namespace ShopTARge23.KindergartenTest
 
             Assert.Equal(result, addKindergarten);
         }
+        // #5 Test
+        [Fact]
+        public void ShouldCalculateTotalChildrenCount()
+        {
+            // arrange
+            var repository = new List<KindergartenDto>
+            {
+                new KindergartenDto
+                {
+                    Id = Guid.NewGuid(),
+                    KindergartenName = "Lasteaed 1",
+                    GroupName = "Grupp A",
+                    Teacher = "Õpetaja A",
+                    ChildrenCount = 10
+                },
+                new KindergartenDto
+                {
+                    Id = Guid.NewGuid(),
+                    KindergartenName = "Lasteaed 2",
+                    GroupName = "Grupp B",
+                    Teacher = "Õpetaja B",
+                    ChildrenCount = 15
+                },
+                new KindergartenDto
+                {
+                    Id = Guid.NewGuid(),
+                    KindergartenName = "Lasteaed 3",
+                    GroupName = "Grupp C",
+                    Teacher = "Õpetaja C",
+                    ChildrenCount = 5
+                }
+            };
+
+            // act
+            var totalChildren = repository.Sum(k => k.ChildrenCount);
+
+            // assert
+            Assert.Equal(30, totalChildren); // 10 + 15 + 5 = 30 last
+        }
+        // #6 Test
+        [Fact]
+        public void ShouldReturnKindergartensWithMoreThanGivenChildrenCount()
+        {
+            // arrange
+            var repository = new List<KindergartenDto>
+            {
+                new KindergartenDto
+                {
+                    Id = Guid.NewGuid(),
+                    KindergartenName = "Lasteaed Väike",
+                    GroupName = "Grupp A",
+                    Teacher = "Õpetaja A",
+                    ChildrenCount = 8
+                },
+                new KindergartenDto
+                {
+                    Id = Guid.NewGuid(),
+                    KindergartenName = "Lasteaed Keskmine",
+                    GroupName = "Grupp B",
+                    Teacher = "Õpetaja B",
+                    ChildrenCount = 15
+                },
+                new KindergartenDto
+                {
+                    Id = Guid.NewGuid(),
+                    KindergartenName = "Lasteaed Suur",
+                    GroupName = "Grupp C",
+                    Teacher = "Õpetaja C",
+                    ChildrenCount = 25
+                }
+            };
+
+            var limit = 10;
+
+            // act
+            var result = repository
+                .Where(k => k.ChildrenCount > limit)
+                .ToList();
+
+            // assert
+            Assert.Equal(2, result.Count); // kaks lasteaeda üle 10 lapse
+            Assert.All(result, k => Assert.True(k.ChildrenCount > limit)); // kõik vastavad tingimusele
+        }
+
+
 
         private KindergartenDto MockKindergartenData()
         {
@@ -83,5 +168,19 @@ namespace ShopTARge23.KindergartenTest
 
             return kindergarten;
         }
+
+        private KindergartenDto MockUpdateKindergartenData()
+        {
+            return new KindergartenDto
+            {
+                GroupName = "TestGroupNameUpdate",
+                ChildrenCount = 11,
+                KindergartenName = "TestKindergartenNameUpdate",
+                Teacher = "TestTeacherUpdate",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+        }
+
     }
 }

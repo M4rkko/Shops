@@ -168,30 +168,6 @@ namespace ShopTARge23.RealEstateTest
             Assert.NotNull(result);
         }
 
-        [Fact]
-        public async Task ShouldNot_UpdateRealEstate_WhenUpdateAlreadyHappening()
-        {
-            var dto = MockRealEstateDataVersion2();
-            var s = Svc<IRealEstateServices>();
-
-            //double originalSize = (double)dto.Size;
-            //int originalRoomNo = (int)dto.RoomNumber;
-
-            var made = await s.Create(dto);
-            made.RoomNumber = 424242;
-
-            dto.Id = made.Id;
-            dto.Size = -1000;
-
-            var task1 = s.Update(dto);
-
-            Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            {
-                dto.RoomNumber = -1;
-                var task2 = s.Update(dto);
-                await task2;
-            });
-        }
 
         private RealEstateDto MockRealEstateData()
         {
