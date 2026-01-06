@@ -5,7 +5,9 @@ using ShopTARge23.ApplicationServices.Services;
 using ShopTARge23.Core.Domain;
 using ShopTARge23.Core.ServiceInterface;
 using ShopTARge23.Models.Accounts;
+using System.Security.Claims;
 using System.Web;
+
 
 namespace ShopTARge23.Controllers
 {
@@ -256,5 +258,81 @@ namespace ShopTARge23.Controllers
 
             return View(model);
         }
+
+
+        // START EXTERNAL LOGIN
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider, string? returnUrl = null)
+        {
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Accounts", new { returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        // Callback
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string? returnUrl = null, string? remoteError = null)
+        {
+            returnUrl ??= Url.Content("~/");
+
+            if (remoteError != null)
+            {
+                ModelState.AddModelError("", $"Error from external provider: {remoteError}");
+                return RedirectToAction("Login");
+            }
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+                return RedirectToAction("Login");
+
+            // Try sign in
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(
+                info.LoginProvider,
+                info.ProviderKey,
+                isPersistent: false,
+                bypassTwoFactor: true);
+
+            if (signInResult.Succeeded)
+                return LocalRedirect(returnUrl);
+
+            // Get email from EXTERNAL...
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            if (email == null)
+                return RedirectToAction("Login");
+
+            var user = await _userManager.FindByEmailAsync(email);
+
+            // Create user if not exists
+            if (user == null)
+            {
+                user = new ApplicationUser
+                {
+                    UserName = email,
+                    Email = email,
+                    Name = info.Principal.FindFirstValue(ClaimTypes.Name) ?? email,
+                    EmailConfirmed = true,
+                    City = "Unknown"
+                };
+
+                var createResult = await _userManager.CreateAsync(user);
+                if (!createResult.Succeeded)
+                    return RedirectToAction("Login");
+            }
+
+            // Link EXTERNAL login if not linked
+            var existingLogin = await _userManager.FindByLoginAsync(
+                info.LoginProvider,
+                info.ProviderKey);
+
+            if (existingLogin == null)
+                await _userManager.AddLoginAsync(user, info);
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return LocalRedirect(returnUrl);
+        }
     }
+
+
 }

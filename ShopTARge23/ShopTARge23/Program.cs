@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -5,6 +6,7 @@ using ShopTARge23.ApplicationServices.Services;
 using ShopTARge23.Core.Domain;
 using ShopTARge23.Core.ServiceInterface;
 using ShopTARge23.Data;
+using AspNet.Security.OAuth.GitHub;
 
 
 namespace ShopTARge23
@@ -27,6 +29,29 @@ namespace ShopTARge23
             builder.Services.AddScoped<IFreeToGamesServices, FreeToGamesServices>();
             builder.Services.AddScoped<ICocktailServices, CocktailServices>();
             builder.Services.AddScoped<IEmailServices, EmailServices>();
+
+            builder.Services.AddAuthentication()
+            .AddGoogle(googleOptions =>
+            {
+                    googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"]
+                        ?? throw new InvalidOperationException("Google ClientId not found.");
+
+                    googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]
+                        ?? throw new InvalidOperationException("Google ClientSecret not found.");
+                });
+
+            // Authentication
+            builder.Services.AddAuthentication()
+                .AddGitHub(options =>
+                {
+                    options.ClientId = builder.Configuration["Authentication:GitHub:ClientId"]
+                        ?? throw new InvalidOperationException("Github ClientSecret not found.");
+
+                    options.ClientSecret = builder.Configuration["Authentication:GitHub:ClientSecret"]
+                        ?? throw new InvalidOperationException("Github ClientSecret not found.");
+
+                    options.Scope.Add("user:email"); // REQUIRED to get email
+                });
 
 
             builder.Services.AddDbContext<ShopTARge23Context>(options =>
@@ -76,5 +101,6 @@ namespace ShopTARge23
 
             app.Run();
         }
+
     }
 }
