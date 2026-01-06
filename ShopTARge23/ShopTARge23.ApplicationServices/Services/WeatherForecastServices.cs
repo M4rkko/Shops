@@ -10,7 +10,7 @@ namespace ShopTARge23.ApplicationServices.Services
     {
         public async Task<AccuLocationWeatherResultDto> AccuWeatherResult(AccuLocationWeatherResultDto dto)
         {
-            string accuApiKey = "zpka_84b6f9d32f8c4a1f9db1134af4fd4067_444474af";//"2LBA498kppCQjyb9ZAh5IgNuMYgZZDEr";
+            string accuApiKey = //"zpka_84b6f9d32f8c4a1f9db1134af4fd4067_444474af";//"2LBA498kppCQjyb9ZAh5IgNuMYgZZDEr";
             string url = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={accuApiKey}&q={dto.CityName}";
 
             using (WebClient client = new WebClient())
